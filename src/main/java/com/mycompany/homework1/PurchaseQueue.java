@@ -12,6 +12,24 @@ public class PurchaseQueue {
   }
 
   /**
+   * Creates a deep copy of he parameter.
+   */
+  public PurchaseQueue(PurchaseQueue other) {
+    this.front = new Node<Purchase>();
+    Purchase front = this.front.data;
+    Purchase oFront = other.front.data;
+
+    if (other.rear == null) {
+      front.itemName = oFront.itemName;
+      front.itemPrice = oFront.itemPrice;
+      front.quantity = oFront.quantity;
+    } else {
+      other.rear.next = this.front;
+    }
+
+  }
+
+  /**
    * Adds a new item to the end of the queue.
    *
    * @param g The item to add to the end of the queue.
@@ -54,27 +72,36 @@ public class PurchaseQueue {
    * @return The amount of elements in the queue.
    */
   int getLength() {
-    Node<Purchase> temp = this.front;
-    int count = 0;
+    if (!this.isEmpty()) {
+      Node<Purchase> temp = this.front;
+      int count = 0;
 
-    while (temp != null) {
-      count++;
+      while (temp != null) {
+        count++;
 
-      temp = temp.next;
+        temp = temp.next;
+      }
+
+      return count;
     }
 
-    return count;
+    return 0;
   }
 
   void show() {
     if (!this.isEmpty()) {
       Node<Purchase> temp = this.front;
 
+      System.out.println("Here is the queue of " + this.getLength() + " purchases:\n[");
+
       while (temp != null) {
-        System.out.println(temp.data);
+        System.out.println("  " + temp.data);
 
         temp = temp.next;
       }
+
+      System.out.println("]");
+
     } else {
       System.out.println("The queue is empty");
     }

@@ -50,13 +50,15 @@ public class NewMain {
     queue.enqueue(new Purchase("Pants", 12, 34));
     queue.enqueue(new Purchase("Shirt", 12, 34));
     queue.enqueue(new Purchase("Lego", 1200, 9.89));
+
     System.out.println("Length of queue before: " + queue.getLength()); // 3
-
     System.out.println("First item: " + queue.dequeue()); // { itemName: Pants, itemPrice: 34.0, itemQuantity: 12.0 }
-    System.out.println("Length of queue after: " + queue.getLength()); // 2
 
-    System.out.println("Here is the queue of purchases:");
     queue.show();
+
+    PurchaseQueue deepQueue = new PurchaseQueue(queue);
+
+    deepQueue.show();
 
     // #endregion
   }
